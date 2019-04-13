@@ -90,6 +90,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_OK);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
+        printWriter.println("Date: " + Paginas.obtenerFecha());//añadido
         printWriter.println("\n");
         printWriter.println(html);
       } //si corresponde a la pÃ¡gina del Quijote
@@ -99,6 +100,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_OK);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
+        printWriter.println("Date: " + Paginas.obtenerFecha());//añadido
         printWriter.println("\n");
         printWriter.println(html);
       } //en cualquier otro caso
@@ -108,6 +110,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_NotFound);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
+        printWriter.println("Date: " + Paginas.obtenerFecha() );//añadido
         printWriter.println("\n");
         printWriter.println(html);
       }

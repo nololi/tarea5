@@ -1,5 +1,11 @@
 package PaquetePrincipal;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 /**
  * ****************************************************************************
  * clase no instanciable donde se definen algunos valores finales
@@ -7,6 +13,22 @@ package PaquetePrincipal;
  * @author IMCG
  */
 public class Paginas {
+	
+	
+	/*
+	 * Método que devuelve la fecha que se usará en la cabecera Páginas de info
+	 * utilizadas sobre Date
+	 * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+	 * https://desarrolloweb.com/articulos/cabeceras-http-livehttpheaders.html 
+	 * A este método lo llamaré desde ServidorHTTP para agregar la cabecera pues aquí solo
+	 * consta el head y body de la página
+	 */
+	public static String obtenerFecha() {
+		DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return dateFormat.format(new Date());
+	}
+	
 
   public static final String primeraCabecera =
           "Content-Type:text/html;charset=UTF-8";
