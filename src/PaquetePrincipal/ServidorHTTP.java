@@ -2,6 +2,11 @@ package PaquetePrincipal;
 
 import java.io.BufferedReader;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -90,7 +95,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_OK);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
-        printWriter.println("Date: " + Paginas.obtenerFecha());//añadido
+        printWriter.println("Date: " + Paginas.fecha);//añadido
         printWriter.println("\n");
         printWriter.println(html);
       } //si corresponde a la pÃ¡gina del Quijote
@@ -100,7 +105,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_OK);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
-        printWriter.println("Date: " + Paginas.obtenerFecha());//añadido
+        printWriter.println("Date: " + Paginas.fecha);//añadido
         printWriter.println("\n");
         printWriter.println(html);
       } //en cualquier otro caso
@@ -110,7 +115,7 @@ class ServidorHTTP {
         printWriter.println(Mensajes.lineaInicial_NotFound);
         printWriter.println(Paginas.primeraCabecera);
         printWriter.println("Content-Length: " + html.length() + 1);
-        printWriter.println("Date: " + Paginas.obtenerFecha() );//añadido
+        printWriter.println("Date: " + Paginas.fecha );//añadido
         printWriter.println("\n");
         printWriter.println(html);
       }
@@ -132,4 +137,18 @@ class ServidorHTTP {
             + "quijote\n para solicitar una pÃ¡gina del Quijote,\n\nhttp://"
             + "localhost:8066/q\n para simular un error");
   }
+  
+  
+  /*
+	 * Método que devuelve la fecha que se usará en la cabecera Páginas de info
+	 * utilizadas sobre Date
+	 * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+	 * https://desarrolloweb.com/articulos/cabeceras-http-livehttpheaders.html 
+	 * La llamada a este método lo agregaré a la cabecera http de cada página
+	 */
+	public static String obtenerFecha() {
+		DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return dateFormat.format(new Date());
+	}
 }
